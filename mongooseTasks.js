@@ -1,15 +1,15 @@
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/test')
+mongoose.connect('mongodb://127.0.0.1:27017/test1')
+var Pudg = require("./models/pudg").pudg
 
-var schema = mongoose.Schema({ name: String })
 
-schema.methods.chin = function(){
-    console.log(this.get("name") + " with arcana")
-}
+var pudg = new Pudg({
+title: "arcana",
+nick: "Feast of Abscession"
+})
 
-var pud = mongoose.model('pud', schema)
 
-var pu = new pud({ name: 'Pudge' })
-pu.save(function (err) {
-    pu.chin()
+console.log(pudg)
+pudg.save(function(err, pudg, affected){
+console.log(pudg.title)
 })
