@@ -8,7 +8,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/pudge')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var pudge = require('./routes/pudge');
+var pudges = require('./routes/pudges');
 
 var app = express();
 
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/pudge', pudge);
+app.use('/pudges', pudges);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
