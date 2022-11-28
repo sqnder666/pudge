@@ -17,4 +17,3 @@ default:Date.now
 }
 })
 module.exports.pudg = mongoose.model("pud", pudgSchema)
-
