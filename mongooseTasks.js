@@ -1,9 +1,9 @@
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/test1')
-var pudge = require("../models/pudge").pudge
+var Pudge = require("../models/pudge").Pudge
 
 
-var pudge = new pudge({
+var pudge = new Pudge({
 title: "arcana",
 nick: "Feast of Abscession"
 })

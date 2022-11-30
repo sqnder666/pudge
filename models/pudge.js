@@ -16,4 +16,4 @@ type:Date,
 default:Date.now
 }
 })
-module.exports.pudge = mongoose.model("pudge", pudgeSchema)
+module.exports.Pudge = mongoose.model("Pudge", pudgeSchema)
