@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 
-var pudgSchema = new Schema({
+var pudgeSchema = new Schema({
 title: String,
 nick: {
 type: String,
@@ -16,4 +16,4 @@ type:Date,
 default:Date.now
 }
 })
-module.exports.pudg = mongoose.model("pud", pudgSchema)
+module.exports.pudge = mongoose.model("pudge", pudgeSchema)

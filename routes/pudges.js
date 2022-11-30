@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var pudge = require("../models/pudge").pudge
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {

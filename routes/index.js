@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* Аркана */
+/* Аркана *
 router.get('/arcana', function(req, res, next) {
   res.render('pers', {
       title: "Feast of Abscession",
@@ -15,7 +15,7 @@ router.get('/arcana', function(req, res, next) {
   });
 });
 
-/* Личность */
+/* Личность *
 router.get('/personality', function(req, res, next) {
   res.render('pers', {
       title: "The Toy Butcher",
@@ -24,7 +24,7 @@ router.get('/personality', function(req, res, next) {
   });
 });
 
-/* Сет */
+/* Сет 
 router.get('/set', function(req, res, next) {
   res.render('pers', {
       title: "Murder of Crows",
@@ -32,5 +32,5 @@ router.get('/set', function(req, res, next) {
       desc: "Не суй свой клюв не в свое дело, предметы из этого набора посвящены выходу документального фильма «Free to Play» от Valve и созданы в партнерстве с Dendi, который получает часть прибыли с продаж."
   });
 });
-
+*/
 module.exports = router;

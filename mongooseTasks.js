@@ -1,15 +1,15 @@
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/test1')
-var Pudg = require("./models/pudg").pudg
+var pudge = require("../models/pudge").pudge
 
 
-var pudg = new Pudg({
+var pudge = new pudge({
 title: "arcana",
 nick: "Feast of Abscession"
 })
 
 
-console.log(pudg)
-pudg.save(function(err, pudg, affected){
-console.log(pudg.title)
+console.log(pudge)
+pudge.save(function(err, pudge, affected){
+console.log(pudge.title)
 })
