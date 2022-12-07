@@ -25,11 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var MongoStore = require('connect-mongo');(session);
 app.use(session({
-  secret: "Puadges",
+  secret: "Pudge",
   cookie:{maxAge:60*1000},
   resave: true,
-  saveUninitialized: true	
+  saveUninitialized: true,
+  store: MongoStore.create({mongoUrl: 'mongodb://127.0.0.1:27017/pudge'})
 }))
 
 app.use('/', indexRouter);
