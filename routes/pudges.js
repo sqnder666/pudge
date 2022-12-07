@@ -10,26 +10,17 @@ router.get('/', function(req, res, next) {
 
 /* Страница котят */
 router.get('/:nick', function(req, res, next) {
-    async.parallel([
-            function(callback){
-                Pudge.findOne({nick:req.params.nick}, callback)
-            },
-            function(callback){
-                Pudge.find({},{_id:0,title:1,nick:1},callback)
-            }
-        ],
-        function(err,result){
-            if(err) return next(err)
-            var pudge = result[0]
-            var pudges = result[1] || []
-            if(!pudge) return next(new Error("Тут нет такого"))
-            res.render('pudge', {
-                title: pudge.title,
-                picture: pudge.avatar,
-                desc: pudge.desc,
-                menu: pudges
-            });
+    Pudge.findOne({nick:req.params.nick}, function(err,pudge){
+        if(err) return next(err)
+        if(!pudge) return next(new Error("нет такого"))
+        res.render('pudgee', {
+          title: pudge.title,
+          picture: pudge.avatar,
+          desc1: pudge.desc1,
+          desc2: pudge.desc2,
+          desc3: pudge.desc3,
         })
-})
+    })
+  })
 
 module.exports = router

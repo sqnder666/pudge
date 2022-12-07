@@ -17,12 +17,11 @@
     <a class="nav-link" href="/">Главная</a>
     </li>
     </ul>
-    <% menu.forEach(function(pudge){ %>
+    <% if(typeof nav == 'object' && nav){ nav.forEach(function(pudge){ %>
         <li class="nav-item">
-        <a class="nav-link" href="/pudges/<%=pudge.nick%>">
-            <%=pudge.title%> </a>
+        <a class="nav-link" href="/pudges/<%=pudge.nick%>"><%=pudge.title%></a>
         </li>
-        <% }) %>
+        <% })} %>        
     <ul class="navbar-nav navbar-right">
     <li>
     <a class="nav-link" href="/logreg">Войти</a>
