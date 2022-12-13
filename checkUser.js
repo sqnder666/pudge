@@ -1,5 +1,5 @@
 var mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost/all")
+mongoose.connect("mongodb://127.0.0.1:27017/pudge")
 var User = require("./models/user.js").User
 
 var first_user = new User({
