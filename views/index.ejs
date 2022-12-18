@@ -1,4 +1,21 @@
-<% layout('layout/page.ejs') %>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
-<p>Счетчик: <%= counter %></p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% layout('./layout/page.ejs') %>
+    <% if(user) {%>
+      // Случай залогиненного пользователя
+      <% }else{ %>
+        // Случай не залогиненного пользователя
+        <% } %>
+
+  </head>
+  <body>
+    <h1>
+      <%= title %>
+    </h1>
+    <p>Welcome to <%= title %></p>
+    <p>Счетчик: <%= counter %></p>
+  </body>
+</html>
