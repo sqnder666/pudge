@@ -1,26 +1,38 @@
-var express = require('express')
-var router = express.Router()
-var Pudge = require("../models/pudge").Pudge
-var async = require("async")
+var express = require('express');
+var router = express.Router();
+var db = require('../mySQLConnect.js');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    res.send('Новый маршрутизатор, для маршрутов, начинающихся с pudge')
+  res.send('Новый маршрутизатор, для маршрутов, начинающихся с pudges');
 });
 
-/* Страница котят */
-router.get('/:nick',checkAuth, function(req, res, next) {
-    Pudge.findOne({nick:req.params.nick}, function(err,pudge){
-        if(err) return next(err)
-        if(!pudge) return next(new Error("нет такого"))
-        res.render('pudgee', {
-          title: pudge.title,
-          picture: pudge.avatar,
-          desc1: pudge.desc1,
-          desc2: pudge.desc2,
-          desc3: pudge.desc3,
-        })
-    })
-  })
+/* Страница пуджей */
+router.get("/:nick", function(req, res, next) {
+db.query(`SELECT * FROM pudges WHERE pudges.nick = '${req.params.nick}'`, (err, pudges) => {
+if(err) {
+console.log(err);
+if(err) return next(err)
+} else {
+if(pudges.length == 0) return next(new Error("Такого нет"))
+var pudge = pudges[0];
+res.render('pudge', {
+title: pudge.title,
+picture: pudge.avatar,
+desc: pudge.about
+})
+// result(null, results);
+}
+})
+// Cat.findOne({nick:req.params.nick}, function(err, cat){
+// if(err) return next(err)
+// if(!cat) return next(new Error("Нет такого котенка в этом мультике"))
+// res.render('cat', {
+// title: cat.title,
+// picture: cat.avatar,
+// desc: cat.desc,
+// });
+// })
+});
 
-module.exports = router
+  module.exports = router
