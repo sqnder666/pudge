@@ -3,16 +3,31 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/pudge')
+//var mongoose = require('mongoose')
+//mongoose.connect('mongodb://127.0.0.1:27017/midnightclub')
 var session = require("express-session")
-var Pudge = require("./models/pudge").Pudge
+var mysql2 = require('mysql2/promise');
+var MySQLStore = require('express-mysql-session')(session);
+
+
+var pudges = require('./routes/pudges');
+var Pudge = require("./models/car").Pudge
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var pudges = require('./routes/pudges');
 
 var app = express();
+
+
+var options = {
+  host : '127.0.0.1',
+  port: '3306',
+  user : 'root',
+  password : 'root',
+  database: 'pudges'
+  };
+  var connection = mysql2.createPool(options)
+  var sessionStore = new MySQLStore( options, connection);
 
 // view engine setup
 app.engine('ejs',require('ejs-locals'));
@@ -25,14 +40,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var MongoStore = require('connect-mongo');(session);
+//var MongoStore = require('connect-mongo'); (session);
+//app.use(session({
+//  secret: "JdmCgdfgdars",
+//  cookie:{maxAge:60*1000},
+//  resave: true,
+//  saveUninitialized: true	,
+ // store: MongoStore.create({mongoUrl: 'mongodb://127.0.0.1:27017/midnightclub'})
+//}))
 app.use(session({
-  secret: "Pudge",
-  cookie:{maxAge:60*1000},
+  secret: 'Pudges',
+  key: 'sid',
+  store: sessionStore,
   resave: true,
   saveUninitialized: true,
-  store: MongoStore.create({mongoUrl: 'mongodb://127.0.0.1:27017/pudge'})
-}))
+  cookie: { path: '/',
+  httpOnly: true,
+  maxAge: 60*1000
+  }
+  }));
+  
+
+
 app.use(function(req,res,next){
   req.session.counter = req.session.counter +1 || 1
   next()
@@ -48,9 +77,8 @@ app.use(function(req,res,next){
   })
 })
 
-app.use(require("./middleware/createMenu.js"))
-app.use(require("./middleware/createUser.js"))
 
+app.use(require("./middleware/createUser.js"));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pudges', pudges);
@@ -71,7 +99,8 @@ app.use(function(err, req, res, next) {
   res.render('error',
   {
     picture: "../images/error.png",
-    title: 'Ошибка, проверьте корректность запроса.'
+    title: 'Ошибка, проверьте корректность запроса.',
+    menu: []
   });
 });
 
