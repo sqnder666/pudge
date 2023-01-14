@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 /* Страница котят */
-router.get('/:nick', checkAuth,function(req, res, next) {
+router.get('/:nick',checkAuth, function(req, res, next) {
     Pudge.findOne({nick:req.params.nick}, function(err,pudge){
         if(err) return next(err)
         if(!pudge) return next(new Error("нет такого"))
