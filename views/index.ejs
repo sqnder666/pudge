@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <% layout('./layout/page.ejs') %>
-    <% if(user) {%>
-      // Случай залогиненного пользователя
-      <% }else{ %>
-        // Случай не залогиненного пользователя
-        <% } %>
+<% layout('/layout/page.ejs') %>
+<% if(user.length > 0) {%>
+<h1>Welcome, <%= user[0].username %>!</h1>
+<% } else { %>
+<h1>Please, Log In to see all pages</h1>
+<% } %>
 
-  </head>
-  <body>
-    <h1>
-      <%= title %>
-    </h1>
-    <p>Welcome to <%= title %></p>
-    <p>Счетчик: <%= counter %></p>
-  </body>
-</html>
+    <h1><%= title %></h1>
+    <p>Welcome to Pudges</p>
+<p>Counter: <%= counter %></p>
